@@ -21,7 +21,7 @@ export default function ProfilePage() {
   useEffect(() => {
     async function fetchProfile() {
       try {
-        const res = await fetch("${API_BASE}/api/user");
+        const res = await fetch(`${API_BASE}/api/user`);
         const data = await res.json();
         setProfile(data);
       } catch (err) {

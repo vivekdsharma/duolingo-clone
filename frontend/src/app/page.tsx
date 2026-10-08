@@ -38,8 +38,8 @@ export default function Home() {
     async function fetchData() {
       try {
         const [userRes, pathRes] = await Promise.all([
-          fetch("${API_BASE}/api/user"),
-          fetch("${API_BASE}/api/path"),
+          fetch(`${API_BASE}/api/user`),
+          fetch(`${API_BASE}/api/path`),
         ]);
         const userData = await userRes.json();
         const pathData = await pathRes.json();

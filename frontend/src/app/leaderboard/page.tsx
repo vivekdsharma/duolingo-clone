@@ -29,8 +29,8 @@ export default function LeaderboardPage() {
     async function fetchLeaderboard() {
       try {
         const [boardRes, userRes] = await Promise.all([
-          fetch("${API_BASE}/api/leaderboard"),
-          fetch("${API_BASE}/api/api/user"),
+          fetch(`${API_BASE}/api/leaderboard`),
+          fetch(`${API_BASE}/api/user`),
         ]);
         const boardData = await boardRes.json();
         const userData = await userRes.json();

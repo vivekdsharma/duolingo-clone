@@ -57,7 +57,7 @@ export default function LessonPage({ params }: { params: Promise<{ lessonId: str
       try {
         const [lessRes, userRes] = await Promise.all([
           fetch(`${API_BASE}/api/lessons/${lessonId}`),
-          fetch("${API_BASE}/api/user"),
+          fetch(`${API_BASE}/api/user`),
         ]);
         const lessonData = await lessRes.json();
         const userData = await userRes.json();
@@ -114,7 +114,7 @@ export default function LessonPage({ params }: { params: Promise<{ lessonId: str
       setStatus("incorrect");
       // Deduct heart in DB
       try {
-        const res = await fetch("${API_BASE}/api/user/deduct-heart", {
+        const res = await fetch(`${API_BASE}/api/user/deduct-heart`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ user_id: 1 }),
@@ -159,7 +159,7 @@ export default function LessonPage({ params }: { params: Promise<{ lessonId: str
 
   const refillHearts = async () => {
     try {
-      const res = await fetch("${API_BASE}/api/user/refill-hearts", {
+      const res = await fetch(`${API_BASE}/api/user/refill-hearts`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user_id: 1 }),
