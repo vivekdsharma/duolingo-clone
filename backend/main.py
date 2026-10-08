@@ -11,10 +11,11 @@ import models
 # App initialization
 app = FastAPI(title="Duolingo Clone API", version="1.0.0")
 
+
 # Enable CORS taaki Next.js frontend bina kisi restriction ke backend se baat kar sake
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
