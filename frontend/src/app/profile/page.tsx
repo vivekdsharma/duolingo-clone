@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Sidebar } from "@/components/navigation/Sidebar";
 import { TopBar } from "@/components/navigation/TopBar";
 import { Flame, Trophy, Heart, Zap, Award } from "lucide-react";
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 
 interface UserProfile {
   id: number;
@@ -20,7 +21,7 @@ export default function ProfilePage() {
   useEffect(() => {
     async function fetchProfile() {
       try {
-        const res = await fetch("http://localhost:8000/api/user");
+        const res = await fetch("${API_BASE}/api/user");
         const data = await res.json();
         setProfile(data);
       } catch (err) {

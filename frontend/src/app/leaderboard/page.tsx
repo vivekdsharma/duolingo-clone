@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Sidebar } from "@/components/navigation/Sidebar";
 import { TopBar } from "@/components/navigation/TopBar";
 import { Trophy, Shield } from "lucide-react";
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 
 interface Player {
   id: number;
@@ -28,8 +29,8 @@ export default function LeaderboardPage() {
     async function fetchLeaderboard() {
       try {
         const [boardRes, userRes] = await Promise.all([
-          fetch("http://localhost:8000/api/leaderboard"),
-          fetch("http://localhost:8000/api/user"),
+          fetch("${API_BASE}/api/leaderboard"),
+          fetch("${API_BASE}/api/api/user"),
         ]);
         const boardData = await boardRes.json();
         const userData = await userRes.json();

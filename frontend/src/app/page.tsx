@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Sidebar } from "@/components/navigation/Sidebar";
 import { TopBar } from "@/components/navigation/TopBar";
 import { PathNode } from "@/components/path/PathNode";
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 
 interface LessonItem {
   id: number;
@@ -37,8 +38,8 @@ export default function Home() {
     async function fetchData() {
       try {
         const [userRes, pathRes] = await Promise.all([
-          fetch("http://localhost:8000/api/user"),
-          fetch("http://localhost:8000/api/path"),
+          fetch("${API_BASE}/api/user"),
+          fetch("${API_BASE}/api/path"),
         ]);
         const userData = await userRes.json();
         const pathData = await pathRes.json();
