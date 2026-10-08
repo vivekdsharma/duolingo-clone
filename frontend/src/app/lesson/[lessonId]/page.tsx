@@ -6,6 +6,7 @@ import confetti from "canvas-confetti";
 import { X, Heart } from "lucide-react";
 import { Button } from "@/components/Button";
 import { LessonCompleteModal, OutOfHeartsModal } from "@/components/lesson/Modals";
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 
 interface Option {
   id: number;
@@ -55,8 +56,8 @@ export default function LessonPage({ params }: { params: Promise<{ lessonId: str
     async function loadData() {
       try {
         const [lessRes, userRes] = await Promise.all([
-          fetch(`http://localhost:8000/api/lessons/${lessonId}`),
-          fetch("http://localhost:8000/api/user"),
+          fetch(`${API_BASE}/api/lessons/${lessonId}`),
+          fetch("${API_BASE}/api/user"),
         ]);
         const lessonData = await lessRes.json();
         const userData = await userRes.json();
@@ -113,7 +114,7 @@ export default function LessonPage({ params }: { params: Promise<{ lessonId: str
       setStatus("incorrect");
       // Deduct heart in DB
       try {
-        const res = await fetch("http://localhost:8000/api/user/deduct-heart", {
+        const res = await fetch("${API_BASE}/api/user/deduct-heart", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ user_id: 1 }),
@@ -141,7 +142,7 @@ export default function LessonPage({ params }: { params: Promise<{ lessonId: str
     } else {
       // Mark Lesson Completed in DB
       try {
-        const res = await fetch(`http://localhost:8000/api/lessons/${lessonId}/complete`, {
+        const res = await fetch(`${API_BASE}/api/lessons/${lessonId}/complete`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ user_id: 1 }),
@@ -158,7 +159,7 @@ export default function LessonPage({ params }: { params: Promise<{ lessonId: str
 
   const refillHearts = async () => {
     try {
-      const res = await fetch("http://localhost:8000/api/user/refill-hearts", {
+      const res = await fetch("${API_BASE}/api/user/refill-hearts", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user_id: 1 }),
